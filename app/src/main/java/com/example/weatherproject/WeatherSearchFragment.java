@@ -21,6 +21,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class WeatherSearchFragment extends Fragment {
 
     private EditText cityEditText;
@@ -98,8 +102,6 @@ public class WeatherSearchFragment extends Fragment {
     }
 
 
-
-
     private void fetchWeatherDataWithCoordinates(double latitude, double longitude) {
         String apiKey = "9a2f9ac50129b5dad7ebb7aa0fb4d4ce"; // Replace with your Weather API key
         String apiUrl = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + apiKey;
@@ -118,10 +120,21 @@ public class WeatherSearchFragment extends Fragment {
                             double temperatureKelvin = mainObject.getDouble("temp");
                             double temperatureCelsius = temperatureKelvin - 273.15;
 
-                            // Transition to WeatherDetailsFragment and pass weather data
+                            // Extract the "last update" information
+                            long lastUpdateTimestamp = response.getLong("dt");
+                            String lastUpdate = formatLastUpdate(lastUpdateTimestamp);
+
+                            // Extract cloudiness and wind information
+                            String cloudiness = response.getJSONArray("weather").getJSONObject(0).getString("description");
+                            String wind = response.getJSONObject("wind").getString("speed");
+
+                            // Pass the weather data to the WeatherDetailsFragment
                             WeatherDetailsFragment weatherDetailsFragment = new WeatherDetailsFragment();
                             Bundle bundle = new Bundle();
                             bundle.putDouble("temperatureCelsius", temperatureCelsius);
+                            bundle.putString("lastUpdate", lastUpdate); // Pass last update information
+                            bundle.putString("cloudiness", cloudiness);
+                            bundle.putString("wind", wind);
                             weatherDetailsFragment.setArguments(bundle);
 
                             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
@@ -144,6 +157,14 @@ public class WeatherSearchFragment extends Fragment {
 
         requestQueue.add(jsonObjectRequest);
     }
+
+    // Helper method to format the "last update" timestamp into a readable date and time
+    private String formatLastUpdate(long timestamp) {
+        Date date = new Date(timestamp * 1000); // Convert timestamp to milliseconds
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        return sdf.format(date);
+    }
 }
+
 
 

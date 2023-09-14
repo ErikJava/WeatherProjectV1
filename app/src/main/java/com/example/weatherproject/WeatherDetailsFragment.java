@@ -13,25 +13,39 @@ import android.widget.TextView;
 
 public class WeatherDetailsFragment extends Fragment {
 
-    private TextView temperatureTextView; // Define the TextView variable
+    private TextView temperatureTextView;
+    private TextView cloudinessTextView;
+    private TextView windTextView;
+    private TextView lastUpdateTextView; // Add this TextView
 
-    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weather_details, container, false);
-        temperatureTextView = view.findViewById(R.id.temperatureTextView); // Find the TextView by ID
+        temperatureTextView = view.findViewById(R.id.temperatureTextView);
+        cloudinessTextView = view.findViewById(R.id.cloudsTextView);
+        windTextView = view.findViewById(R.id.windTextView);
+        lastUpdateTextView = view.findViewById(R.id.lastUpdateTextView); // Find the TextView by ID
 
-        // Retrieve the passed temperature value and display it
+        // Retrieve the passed weather data and display it
         Bundle bundle = getArguments();
-        if (bundle != null && bundle.containsKey("temperatureCelsius")) {
+        if (bundle != null) {
             double temperatureCelsius = bundle.getDouble("temperatureCelsius");
+            String cloudiness = bundle.getString("cloudiness");
+            String wind = bundle.getString("wind");
+            String lastUpdate = bundle.getString("lastUpdate"); // Get last update information
 
-            // Display the temperature in the TextView
+            // Display the weather data in the TextViews
             temperatureTextView.setText("Temperature in Celsius: " + temperatureCelsius + "°C");
+            cloudinessTextView.setText("Cloudiness: " + cloudiness);
+            windTextView.setText("Wind: " + wind);
+            lastUpdateTextView.setText("Last Update: " + lastUpdate); // Display last update
         } else {
-            // Handle the case where temperature data is missing
+            // Handle the case where weather data is missing
             temperatureTextView.setText("Temperature data not available");
+            cloudinessTextView.setText("Cloudiness data not available");
+            windTextView.setText("Wind data not available");
+            lastUpdateTextView.setText("Last Update data not available");
         }
 
         return view;

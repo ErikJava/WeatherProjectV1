@@ -16,13 +16,30 @@
         android:layout_marginBottom="16dp"
         />
 
-    <Button
-        android:id="@+id/detailsButton"
+    <TextView
+        android:id="@+id/cloudsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Details"
-        android:layout_below="@id/temperatureTextView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
+        android:text="Clouds: "
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/temperatureTextView" />
+
+    <TextView
+        android:id="@+id/windTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wind: "
+        android:textSize="18sp"
+        android:layout_below="@id/cloudsTextView" />
+
+    <TextView
+        android:id="@+id/lastUpdateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last Update: "
+        android:textSize="18sp"
+        android:layout_below="@id/windTextView" />
+
 
 </RelativeLayout>
