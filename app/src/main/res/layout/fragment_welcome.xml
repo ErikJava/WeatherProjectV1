@@ -8,17 +8,17 @@
         android:id="@+id/welcomeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to the weather app. Click 'Begin' button to continue."
-        android:textSize="18sp"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true"
+        android:text="Welcome to the weather app. Click &quot;Start&quot; to begin a new search."
+        android:textSize="18sp" />
 
     <Button
-        android:id="@+id/beginButton"
+        android:id="@+id/startButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Begin"
         android:layout_below="@id/welcomeTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:text="Start" />
 
 </RelativeLayout>

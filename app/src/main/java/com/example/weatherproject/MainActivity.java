@@ -21,20 +21,12 @@ public class MainActivity extends AppCompatActivity {
         beginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Replace the current fragment with WeatherSearchFragment
+                beginButton.setVisibility(View.INVISIBLE);
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragmentContainer, new WeatherSearchFragment())
+                        .replace(R.id.fragmentContainer, new WelcomeFragment())
                         .addToBackStack(null)
                         .commit();
             }
         });
-
-        // Check if there is no saved instance state (i.e., first launch)
-        if (savedInstanceState == null) {
-            // Initial fragment transaction (WelcomeFragment)
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentContainer, new WelcomeFragment())
-                    .commit();
-        }
     }
 }

@@ -12,8 +12,8 @@
         android:id="@+id/beginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Begin"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true"
+        android:text="Begin" />
 
     <!-- This is the Fragment container for the WelcomeFragment -->
     <FrameLayout
